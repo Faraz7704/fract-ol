@@ -6,7 +6,7 @@
 #    By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 11:40:15 by fkhan             #+#    #+#              #
-#    Updated: 2022/06/19 14:35:59 by fkhan            ###   ########.fr        #
+#    Updated: 2022/06/19 16:16:09 by fkhan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,11 +34,11 @@ MINILIBX_DIRECTORY 	= $(LIB_DIRECTORY)minilibx_opengl/
 MINILIBX_HEADERS	= $(MINILIBX_DIRECTORY)
 
 HEADERS_DIRECTORY 	= ./includes/
-HEADERS_LIST 		= fractol.h
+HEADERS_LIST 		= fractol.h debug_log.h
 HEADERS 			= $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY 	= ./sources/
-SOURCES_LIST 		= fractol.c
+SOURCES_LIST 		= fractol.c debug_log.c
 SOURCES 			= $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
 OBJECTS_DIRECTORY 	= objects/
@@ -86,7 +86,6 @@ clean:
 	@$(MAKE) -sC $(FT_PRINTF_DIRECTORY) clean
 	@$(MAKE) -sC $(MINILIBX_DIRECTORY) clean
 	@rm -rf $(OBJECTS_DIRECTORY)
-	@echo "$(NAME): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
 	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
 
 fclean: clean
