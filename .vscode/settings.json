@@ -2,6 +2,11 @@
     "files.associations": {
         "*.properties": "properties",
         "libft.h": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "__bit_reference": "c",
+        "algorithm": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "unordered_map": "c"
     }
 }

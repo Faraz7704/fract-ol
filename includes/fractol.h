@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/20 15:22:59 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/21 20:23:12 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 typedef struct s_imageinfo
 {
 	void			*image;
-	char			*data_addr;
+	char			*addr;
 	int				bits_per_pixel;
-	int				size_line;
+	int				line_length;
 	int				endian;
 }	t_imageinfo;
 

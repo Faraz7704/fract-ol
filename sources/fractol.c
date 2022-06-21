@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/21 14:46:09 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/21 20:25:23 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static t_imageinfo	*init_imageinfo(void *mlx)
 	info->image = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!info->image)
 		debug_log(ERR_IMAGE_INIT);
-	info->data_addr = mlx_get_data_addr(
+	info->addr = mlx_get_data_addr(
 		info->image,
 		&info->bits_per_pixel,
-		&info->size_line,
+		&info->line_length,
 		&info->endian);
 	return (info);
 }
@@ -63,21 +63,31 @@ t_appinfo	*init_app(char *name)
 	return (info);
 }
 
+void	put_pixel(t_imageinfo *info, int x, int y, int color)
+{
+	int		pixel_pos;
+
+	pixel_pos = y * info->line_length + x * (info->bits_per_pixel / 8);
+	*(unsigned int *)&info->addr[pixel_pos] = color;
+}
+
 static void	draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 {
-	int	i;
-	int	j;
+	int		x;
+	int		y;
+	int		white_color;
 
-	i = 0;
-	while (i < HEIGHT)
+	white_color = 0xFFFFFF;
+	y = 0;
+	while (y < HEIGHT)
 	{
-		j = 0;
-		while (j < WIDTH)
+		x = 0;
+		while (x < WIDTH)
 		{
-			fractolinfo->imageinfo->data_addr[j * i] = create_trgb(255, 255, 255, 255);
-			j++;
+			put_pixel(fractolinfo->imageinfo, x, y, white_color);
+			x++;
 		}
-		i++;
+		y++;
 	}
 	mlx_put_image_to_window(appinfo->mlx, appinfo->window,
 		fractolinfo->imageinfo->image, 0, 0);
@@ -90,8 +100,7 @@ void	start_app(char *name)
 
 	appinfo = init_app(name);
 	fractolinfo = init_fractolinfo(name, appinfo);
-	draw_app(appinfo, fractolinfo);
-	mlx_loop(appinfo->mlx);
+	draw_app(appinfo, fractolinfo);	mlx_loop(appinfo->mlx);
 }
 
 int	main(int ac, char **av)
