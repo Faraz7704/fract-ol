@@ -6,7 +6,7 @@
 #    By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 13:01:55 by fkhan             #+#    #+#              #
-#    Updated: 2022/06/19 14:17:38 by fkhan            ###   ########.fr        #
+#    Updated: 2022/06/20 17:55:08 by fkhan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ INCLUDES 			= -I$(HEADERS_DIRECTORY) -I$(LIBFT_HEADERS)
 
 LIB_DIRECTORY 		= ../
 
+LIBFT 				= $(LIBFT_DIRECTORY)libft.a
 LIBFT_DIRECTORY 	= $(LIB_DIRECTORY)libft/
 LIBFT_HEADERS 		= $(LIBFT_DIRECTORY)includes/
 
@@ -32,7 +33,7 @@ SOURCES_LIST 		= ft_printf.c ft_printf_flags.c pf_putlchar_fd.c \
 				  		pf_width.c ft_puthex.c ft_hexlen.c
 SOURCES 			= $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
-OBJECTS_DIRECTORY 	= ./objects/
+OBJECTS_DIRECTORY 	= objects/
 OBJECTS_LIST 		= $(patsubst %.c, %.o, $(SOURCES_LIST))
 OBJECTS				= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
@@ -44,6 +45,8 @@ RESET 				= \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJECTS_DIRECTORY) $(OBJECTS)
+	@cp $(LIBFT) .
+	@mv libft.a $(NAME)
 	@$(LIB) $(NAME) $(OBJECTS)
 	@echo "\n$(NAME): $(GREEN)object files were created$(RESET)"
 	@echo "$(NAME): $(GREEN)$(NAME) was created$(RESET)"

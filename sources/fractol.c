@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/19 17:06:17 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/21 14:46:09 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,7 @@ static void	draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 		j = 0;
 		while (j < WIDTH)
 		{
-			fractolinfo->imageinfo->data_addr[j * i] = 10;
-			fractolinfo->imageinfo->data_addr[++j * i] = 20;
-			fractolinfo->imageinfo->data_addr[++j * i] = 30;
-			fractolinfo->imageinfo->data_addr[++j * i] = 40;
+			fractolinfo->imageinfo->data_addr[j * i] = create_trgb(255, 255, 255, 255);
 			j++;
 		}
 		i++;
