@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/21 20:23:12 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/23 14:38:07 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 
 # include "libft.h"
 # include "ft_printf.h"
-# include <mlx.h>
 # include "debug_log.h"
+# include <mlx.h>
+# include <math.h>
 
 # define WIDTH		700
 # define HEIGHT		500
+
+typedef struct s_color
+{
+	int8_t	*channel;
+}	t_color;
 
 typedef struct s_imageinfo
 {
