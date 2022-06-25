@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/23 19:17:23 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/24 12:33:44 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	put_pixel(t_imageinfo *info, int x, int y, t_color color)
 	int		pixel_pos;
 
 	pixel_pos = y * info->line_length + x * (info->bits_per_pixel / 8);
-	*(unsigned int *)&info->addr[pixel_pos++] = 1;//color.channel[3];
-	// *(unsigned int *)&info->addr[pixel_pos++] = color.channel[2];
-	// *(unsigned int *)&info->addr[pixel_pos++] = color.channel[1];
-	// *(unsigned int *)&info->addr[pixel_pos] = color.channel[0];
+	*(unsigned int *)&info->addr[pixel_pos++] = color.channel[3];
+	*(unsigned int *)&info->addr[pixel_pos++] = color.channel[2];
+	*(unsigned int *)&info->addr[pixel_pos++] = color.channel[1];
+	*(unsigned int *)&info->addr[pixel_pos] = color.channel[0];
 }
 
 t_color	get_color(int iteration, int max_iteration)

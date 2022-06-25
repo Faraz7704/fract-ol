@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Tue Jun 21 14:45:00 2022
+# Make data base, printed on Sat Jun 25 21:12:30 2022
 
 # Variables
 
@@ -40,7 +40,6 @@ SHELL = /bin/sh
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
- 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 42)
@@ -54,7 +53,7 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # makefile (from `Makefile', line 33)
 MINILIBX_DIRECTORY = $(LIB_DIRECTORY)minilibx_opengl/
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/ry/tbxdcn2x34q_gjw4rn0_gv700000gn/T/vscode-ipc-fccbb4db-772f-46d9-9046-61b49391c831.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/ry/tbxdcn2x34q_gjw4rn0_gv700000gn/T/vscode-ipc-4a01ad49-0d4c-45f1-838c-0cdcd1a656bd.sock
 # environment
 VSCODE_CWD = /
 # makefile (from `Makefile', line 30)
@@ -79,6 +78,7 @@ SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.4NCiPgmD4d/Listeners
 %F = $(notdir $%)
 # makefile (from `Makefile', line 37)
 HEADERS_LIST = fractol.h debug_log.h
+ 
 # makefile (from `Makefile', line 40)
 SOURCES_DIRECTORY = ./sources/
 # environment
@@ -102,7 +102,7 @@ VSCODE_CODE_CACHE_PATH = /Users/faraz/Library/Application Support/Code/CachedDat
 # environment
 LOGNAME = faraz
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # makefile (from `Makefile', line 38)
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 # environment
@@ -158,7 +158,6 @@ MFLAGS = -Rrqp
 # environment
 XPC_SERVICE_NAME = application.com.microsoft.VSCode.119650752.119650758
 # automatic
- 
 +D = $(patsubst %/,%,$(dir $+))
 # makefile (from `Makefile', line 36)
 HEADERS_DIRECTORY = ./includes/
@@ -207,7 +206,7 @@ LANG = C
 # environment
 VSCODE_PID = 54761
 # variable set hash-table stats:
-# Load=96/1024=9%, Rehash=0, Collisions=6/163=4%
+# Load=96/1024=9%, Rehash=0, Collisions=5/151=3%
 
 # Pattern-specific Variable Values
 
@@ -215,9 +214,11 @@ VSCODE_PID = 54761
 
 # Directories
 
-# . (device 16777220, inode 119802987): 11 files, no impossibilities.
+# . (device 16777220, inode 119802987): 12 files, no impossibilities.
+# sources (device 16777220, inode 119831210): 5 files, no impossibilities so far.
+# includes (device 16777220, inode 119831198): 4 files, no impossibilities so far.
 
-# 11 files, no impossibilities in 1 directories.
+# 21 files, no impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -231,13 +232,22 @@ objects/%.o: ./sources/%.c ./includes/fractol.h ./includes/debug_log.h
 
 # Files
 
+# Not a target:
+sources/fractol.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 12:33:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 fractol: lib/libft/libft.a lib/ft_printf/libft_printf.a lib/minilibx_opengl/libmlx.a objects/ objects/fractol.o objects/debug_log.o objects/colors.o
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Last modified 2022-06-24 12:34:00
 #  File has been updated.
-#  Needs to be updated (-q is set).
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/12=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 #  commands to execute (from `Makefile', line 58):
 	@$(CC) $(FLAGS) $(OBJECTS) $(LIBRARIES) $(INCLUDES) -o $(NAME)
 	@echo "\n$(NAME): $(GREEN)object files were created$(RESET)"
@@ -246,8 +256,9 @@ fractol: lib/libft/libft.a lib/ft_printf/libft_printf.a lib/minilibx_opengl/libm
 
 objects/:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Last modified 2022-06-24 12:33:59
+#  File has been updated.
+#  Successfully updated.
 #  commands to execute (from `Makefile', line 63):
 	@mkdir -p $(OBJECTS_DIRECTORY)
 	@echo "$(NAME): $(GREEN)$(OBJECTS_DIRECTORY) was created$(RESET)"
@@ -259,40 +270,20 @@ all: fractol
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/12=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 .PHONY: all bonus clean fclean re
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
 
 lib/ft_printf/libft_printf.a:
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
-#  File does not exist.
+#  Last modified 2022-06-21 14:45:40
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := lib/ft_printf/libft_printf.a
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := 
-# automatic
-# | := 
-# automatic
-# < := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=8/20=40%
+#  Successfully updated.
 #  commands to execute (from `Makefile', line 75):
 	@echo "$(NAME): $(GREEN)Creating $(FT_PRINTF)...$(RESET)"
 	@$(MAKE) -sC $(FT_PRINTF_DIRECTORY)
@@ -313,11 +304,29 @@ Makefile:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+# Not a target:
+includes/debug_log.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-19 16:42:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+includes/fractol.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 12:33:36
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+ 
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 bonus: all
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
- 
 #  File has not been updated.
 
 fclean: clean
@@ -367,22 +376,39 @@ clean:
 
 lib/minilibx_opengl/libmlx.a:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Last modified 2022-06-21 14:45:45
+#  File has been updated.
+#  Successfully updated.
 #  commands to execute (from `Makefile', line 79):
 	@echo "$(NAME): $(GREEN)Creating $(MINILIBX)...$(RESET)"
 	@$(MAKE) -sC $(MINILIBX_DIRECTORY)
 	
 
+objects/colors.o: sources/colors.c includes/fractol.h includes/debug_log.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `colors'
+#  Last modified 2022-06-24 12:33:59
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 67):
+	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
+	@echo ".\c"
+	
+
 # Not a target:
-objects/colors.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+sources/colors.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-19 23:19:46
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 lib/libft/libft.a:
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-19 15:51:34
+#  Last modified 2022-06-21 14:45:39
 #  File has been updated.
 #  Successfully updated.
 #  commands to execute (from `Makefile', line 71):
@@ -390,21 +416,44 @@ lib/libft/libft.a:
 	@$(MAKE) -sC $(LIBFT_DIRECTORY)
 	
 
-# Not a target:
-objects/debug_log.o:
+objects/debug_log.o: sources/debug_log.c includes/fractol.h includes/debug_log.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `debug_log'
+#  Last modified 2022-06-24 12:33:59
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 67):
+	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
+	@echo ".\c"
+	
+
+objects/fractol.o: sources/fractol.c includes/fractol.h includes/debug_log.h
  
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `fractol'
+#  Last modified 2022-06-24 12:33:59
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 67):
+	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
+	@echo ".\c"
+	
 
 # Not a target:
-objects/fractol.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+sources/debug_log.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-19 16:15:28
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=17/1024=2%, Rehash=0, Collisions=0/46=0%
+# Load=22/1024=2%, Rehash=0, Collisions=0/71=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -416,6 +465,6 @@ objects/fractol.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Jun 21 14:45:00 2022
+# Finished Make data base on Sat Jun 25 21:12:30 2022
 
  
