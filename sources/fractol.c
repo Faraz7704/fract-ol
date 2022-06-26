@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/24 12:33:44 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/27 00:53:33 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_imageinfo	*init_imageinfo(void *mlx)
 	return (info);
 }
 
-static t_fractolinfo	*init_fractolinfo(char *name, t_appinfo *appinfo)
+static t_fractolinfo	*init_fractolinfo(char *name, int max_iteration, t_appinfo *appinfo)
 {
 	t_fractolinfo	*info;
 
@@ -45,6 +45,7 @@ static t_fractolinfo	*init_fractolinfo(char *name, t_appinfo *appinfo)
 		debug_log(ERR_FRACTOL_INIT);
 	info->name = name;
 	info->imageinfo = init_imageinfo(appinfo->mlx);
+	info->max_iteration = max_iteration;
 	return (info);
 }
 
@@ -63,58 +64,73 @@ t_appinfo	*init_app(char *name)
 	return (info);
 }
 
-void	put_pixel(t_imageinfo *info, int x, int y, t_color color)
+void	put_pixel(t_imageinfo *info, int x, int y, int color)
 {
 	int		pixel_pos;
 
-	pixel_pos = y * info->line_length + x * (info->bits_per_pixel / 8);
-	*(unsigned int *)&info->addr[pixel_pos++] = color.channel[3];
-	*(unsigned int *)&info->addr[pixel_pos++] = color.channel[2];
-	*(unsigned int *)&info->addr[pixel_pos++] = color.channel[1];
-	*(unsigned int *)&info->addr[pixel_pos] = color.channel[0];
+	pixel_pos = (y * info->line_length) + (x * (info->bits_per_pixel / 8));
+	*(unsigned int *)&info->addr[pixel_pos] = color;
+	// *(unsigned int *)&info->addr[pixel_pos] = color.channel[3];
+	// *(unsigned int *)&info->addr[++pixel_pos] = color.channel[2];
+	// *(unsigned int *)&info->addr[++pixel_pos] = color.channel[1];
+	// *(unsigned int *)&info->addr[++pixel_pos] = color.channel[0];
 }
 
-t_color	get_color(int iteration, int max_iteration)
+int	get_color(int iteration, int max_iteration)
 {
-	t_color	color;
+	int		color;
 	double	t;
 
-	t = (double)iteration / max_iteration;
-	color.channel[0] = 0;
-	color.channel[1] = (int8_t)(9 * (1 - t) * pow(t, 3) * 255);
-	color.channel[2] = (int8_t)(15 * pow((1 - t), 2) * pow(t, 2) * 255);
-	color.channel[3] = (int8_t)(8.5 * pow((1 - t), 3) * t * 255);
+	if (iteration == max_iteration)
+		color = 0x000000;
+	else
+	{
+		t = (double)iteration / max_iteration;
+		color = t * 0xd7afd7;
+	}
+	// color.channel[0] = 0;
+	// color.channel[1] = (int8_t)(t * 0xd7afd7);
+	// color.channel[2] = (int8_t)(t * 0xd7afd7);
+	// color.channel[3] = (int8_t)(t * 0xd7afd7);
 	return (color);
 }
 
-void	put_mandelbrot(t_imageinfo *info, int x, int y)
+t_vector2	init_vector2(double x, double y)
+{
+	t_vector2	vector2;
+
+	vector2.x = x;
+	vector2.y = y;
+	return (vector2);
+}
+
+int	put_mandelbrot(t_vector2 pixel, int max_iteration)
 {
 	int		iteration;
-	int		max_iteration;
 	int		xtemp;
-	t_color	color;
-	int		x0;
-	int		y0;
+	int		x;
+	int		y;
 
-	x0 =  -2.0 + x * ((2.0 - (-2.0)) / (WIDTH - 1)); 
-	y0 = (-2.0 + (2.0 - (-2.0)) * (HEIGHT / WIDTH)) - y * (((-2.0 + (2.0 - -2.0) * (HEIGHT / WIDTH)) - (-2.0)) / (HEIGHT - 1));
+	x = 0;
+	y = 0;
 	iteration = 0;
-	max_iteration = 100;
 	while ((x * x) + (y * y) <= 4 && iteration < max_iteration)
 	{
-		xtemp = (x * x) - (y * y) + x0;
-		y = (2 * x * y) + y0;
+		xtemp = (x * x) - (y * y) + pixel.x;
+		y = (2 * x * y) + pixel.y;
 		x = xtemp;
 		iteration++;
 	}
-	color = get_color(iteration, max_iteration);
-	put_pixel(info, x, y, color);
+	return (iteration);
 }
 
 static void	draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
+	int			iteration;
+	int			color;
+	t_vector2	pixel;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -122,7 +138,10 @@ static void	draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 		x = 0;
 		while (x < WIDTH)
 		{
-			put_mandelbrot(fractolinfo->imageinfo, x, y);
+			pixel = init_vector2(x * ((1.2 - (-2.05)) / WIDTH) + (-2.05), y * ((1.2 - (-1.3)) / HEIGHT) + (-1.3));
+			iteration = put_mandelbrot(pixel, fractolinfo->max_iteration);
+			color = get_color(iteration, fractolinfo->max_iteration);
+			put_pixel(fractolinfo->imageinfo, x, y, color);
 			x++;
 		}
 		y++;
@@ -137,7 +156,7 @@ void	start_app(char *name)
 	t_fractolinfo	*fractolinfo;
 
 	appinfo = init_app(name);
-	fractolinfo = init_fractolinfo(name, appinfo);
+	fractolinfo = init_fractolinfo(name, 100, appinfo);
 	draw_app(appinfo, fractolinfo);	mlx_loop(appinfo->mlx);
 }
 
