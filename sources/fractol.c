@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/27 00:53:33 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/27 16:20:29 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,34 +64,27 @@ t_appinfo	*init_app(char *name)
 	return (info);
 }
 
-void	put_pixel(t_imageinfo *info, int x, int y, int color)
+void	put_pixel(t_imageinfo *info, t_vector2 pixel, t_color color)
 {
 	int		pixel_pos;
 
-	pixel_pos = (y * info->line_length) + (x * (info->bits_per_pixel / 8));
-	*(unsigned int *)&info->addr[pixel_pos] = color;
-	// *(unsigned int *)&info->addr[pixel_pos] = color.channel[3];
-	// *(unsigned int *)&info->addr[++pixel_pos] = color.channel[2];
-	// *(unsigned int *)&info->addr[++pixel_pos] = color.channel[1];
-	// *(unsigned int *)&info->addr[++pixel_pos] = color.channel[0];
+	pixel_pos = (pixel.y * info->line_length)
+		+ (pixel.x * (info->bits_per_pixel / 8));
+	*(unsigned int *)&info->addr[pixel_pos] = color.channel[3];
+	*(unsigned int *)&info->addr[++pixel_pos] = color.channel[2];
+	*(unsigned int *)&info->addr[++pixel_pos] = color.channel[1];
+	*(unsigned int *)&info->addr[++pixel_pos] = color.channel[0];
 }
 
-int	get_color(int iteration, int max_iteration)
+t_color	get_color(t_vector2 pixel, int iteration, int max_iteration)
 {
-	int		color;
+	t_color	color;
 	double	t;
 
 	if (iteration == max_iteration)
-		color = 0x000000;
-	else
-	{
-		t = (double)iteration / max_iteration;
-		color = t * 0xd7afd7;
-	}
-	// color.channel[0] = 0;
-	// color.channel[1] = (int8_t)(t * 0xd7afd7);
-	// color.channel[2] = (int8_t)(t * 0xd7afd7);
-	// color.channel[3] = (int8_t)(t * 0xd7afd7);
+		return (create_trgb(0, 0, 0, 0));
+	t = iteration / max_iteration;
+	color.channel[0] = ft_ler
 	return (color);
 }
 
@@ -129,7 +122,7 @@ static void	draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 	int			x;
 	int			y;
 	int			iteration;
-	int			color;
+	t_color		color;
 	t_vector2	pixel;
 
 	y = 0;
@@ -138,9 +131,10 @@ static void	draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 		x = 0;
 		while (x < WIDTH)
 		{
-			pixel = init_vector2(x * ((1.2 - (-2.05)) / WIDTH) + (-2.05), y * ((1.2 - (-1.3)) / HEIGHT) + (-1.3));
+			// pixel = init_vector2(x * ((1.2 - (-2.05)) / WIDTH) + (-2.05), y * ((1.2 - (-1.3)) / HEIGHT) + (-1.3));
+			pixel = init_vector2(x, y);
 			iteration = put_mandelbrot(pixel, fractolinfo->max_iteration);
-			color = get_color(iteration, fractolinfo->max_iteration);
+			color = get_color(pixel, iteration, fractolinfo->max_iteration);
 			put_pixel(fractolinfo->imageinfo, x, y, color);
 			x++;
 		}

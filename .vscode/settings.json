@@ -9,6 +9,7 @@
         "chrono": "c",
         "unordered_map": "c",
         "complex": "c",
-        "ratio": "c"
+        "ratio": "c",
+        "fractol.h": "c"
     }
 }

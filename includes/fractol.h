@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/27 01:12:10 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/27 16:18:56 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "debug_log.h"
 # include <mlx.h>
 # include <math.h>
+# include <stdint.h>
 
 # define WIDTH		1000
 # define HEIGHT		1000
@@ -35,7 +36,7 @@ typedef struct s_color
 
 typedef struct s_viewport
 {
-	t_vector2		position;
+	t_vector2		pos;
 	t_vector2		size;
 }	t_viewport;
 
@@ -62,11 +63,6 @@ typedef struct s_appinfo
 }	t_appinfo;
 
 // Colors
-int				create_trgb(unsigned char t, unsigned char r,
-					unsigned char g, unsigned char b);
-unsigned char	get_t(int trgb);
-unsigned char	get_r(int trgb);
-unsigned char	get_g(int trgb);
-unsigned char	get_b(int trgb);
+t_color	create_trgb(int t, int r, int g, int b);
 
 #endif

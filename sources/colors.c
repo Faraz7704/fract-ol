@@ -6,32 +6,19 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/19 23:19:46 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/27 16:13:22 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	create_trgb(unsigned char t, unsigned char r, unsigned char g,
-				unsigned char b)
-{
-	return (*(int *)(unsigned char [4]){b, g, r, t});
-}
+#include "fractol.h"
 
-unsigned char	get_t(int trgb)
+t_color	create_trgb(int t, int r, int g, int b)
 {
-	return (((unsigned char *)&trgb)[3]);
-}
+	t_color	color;
 
-unsigned char	get_r(int trgb)
-{
-	return (((unsigned char *)&trgb)[2]);
-}
-
-unsigned char	get_g(int trgb)
-{
-	return (((unsigned char *)&trgb)[1]);
-}
-
-unsigned char	get_b(int trgb)
-{
-	return (((unsigned char *)&trgb)[0]);
+	color.channel[0] = t;
+	color.channel[1] = r;
+	color.channel[2] = g;
+	color.channel[3] = b;
+	return (color);
 }
