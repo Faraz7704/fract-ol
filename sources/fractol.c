@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/27 16:20:29 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/28 20:36:18 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,13 @@ void	put_pixel(t_imageinfo *info, t_vector2 pixel, t_color color)
 
 t_color	get_color(t_vector2 pixel, int iteration, int max_iteration)
 {
-	t_color	color;
 	double	t;
 
+	(void)pixel;
 	if (iteration == max_iteration)
 		return (create_trgb(0, 0, 0, 0));
-	t = iteration / max_iteration;
-	color.channel[0] = ft_ler
-	return (color);
+	t = iteration;// / max_iteration;
+	return (create_trgb(0, t * 255, t * 255, t * 255));
 }
 
 t_vector2	init_vector2(double x, double y)
@@ -97,21 +96,60 @@ t_vector2	init_vector2(double x, double y)
 	return (vector2);
 }
 
-int	put_mandelbrot(t_vector2 pixel, int max_iteration)
+t_rect	init_rect(double x, double y, double w, double h)
 {
-	int		iteration;
-	int		xtemp;
-	int		x;
-	int		y;
+	t_rect	rect;
 
-	x = 0;
-	y = 0;
+	rect.pos = init_vector2(x, y);
+	rect.size = init_vector2(w, h);
+	return (rect);
+}
+
+static t_vector2	get_pixel_scaled(t_vector2 pixel, t_rect viewport)
+{
+	t_vector2	pixel_scaled;
+	int			scale_factor;
+	int			viewport_ratio;
+	int			screen_ratio;
+
+	viewport_ratio = viewport.size.x / viewport.size.y;
+	screen_ratio = WIDTH / HEIGHT;
+	if (screen_ratio > viewport_ratio)
+		scale_factor = HEIGHT / viewport.size.y;
+	else
+		scale_factor = WIDTH / viewport.size.x;
+	pixel_scaled.x = (pixel.x / scale_factor) + viewport.pos.x;
+	pixel_scaled.y = (pixel.y / scale_factor) + viewport.pos.y;
+	return (pixel_scaled);
+}
+
+int	put_rectangle(t_vector2 pixel, t_rect viewport, int max_iteration)
+{
+	t_vector2	pixel_scaled;
+
+	pixel_scaled = get_pixel_scaled(pixel, viewport);
+	if (pixel_scaled.x >= 0 && pixel_scaled.x < viewport.size.x
+		&& pixel_scaled.y >= 0 && pixel_scaled.y < viewport.size.y)
+		return (max_iteration);
+	return (1);
+}
+
+int	put_mandelbrot(t_vector2 pixel, t_rect viewport, int max_iteration)
+{
+	int			iteration;
+	double		xtemp;
+	t_vector2	pixel_scaled;
+
+	pixel_scaled = get_pixel_scaled(pixel, viewport);
+	pixel.x = 0;
+	pixel.y = 0;
 	iteration = 0;
-	while ((x * x) + (y * y) <= 4 && iteration < max_iteration)
+	while ((pixel.x * pixel.x) + (pixel.y * pixel.y) <= 4
+		&& iteration < max_iteration)
 	{
-		xtemp = (x * x) - (y * y) + pixel.x;
-		y = (2 * x * y) + pixel.y;
-		x = xtemp;
+		xtemp = (pixel.x * pixel.x) - (pixel.y * pixel.y) + pixel_scaled.x;
+		pixel.y = (2 * pixel.x * pixel.y) + pixel_scaled.y;
+		pixel.x = xtemp;
 		iteration++;
 	}
 	return (iteration);
@@ -119,26 +157,23 @@ int	put_mandelbrot(t_vector2 pixel, int max_iteration)
 
 static void	draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 {
-	int			x;
-	int			y;
+	t_vector2	pixel;
 	int			iteration;
 	t_color		color;
-	t_vector2	pixel;
 
-	y = 0;
-	while (y < HEIGHT)
+	pixel.y = 0;
+	while (pixel.y < HEIGHT)
 	{
-		x = 0;
-		while (x < WIDTH)
+		pixel.x = 0;
+		while (pixel.x < WIDTH)
 		{
-			// pixel = init_vector2(x * ((1.2 - (-2.05)) / WIDTH) + (-2.05), y * ((1.2 - (-1.3)) / HEIGHT) + (-1.3));
-			pixel = init_vector2(x, y);
-			iteration = put_mandelbrot(pixel, fractolinfo->max_iteration);
+			iteration = put_rectangle(pixel, init_rect(0, 0, 1, 1), fractolinfo->max_iteration);
+			// iteration = put_mandelbrot(pixel, init_rect(0, 0, 1.53, 2.24), fractolinfo->max_iteration);
 			color = get_color(pixel, iteration, fractolinfo->max_iteration);
-			put_pixel(fractolinfo->imageinfo, x, y, color);
-			x++;
+			put_pixel(fractolinfo->imageinfo, pixel, color);
+			pixel.x++;
 		}
-		y++;
+		pixel.y++;
 	}
 	mlx_put_image_to_window(appinfo->mlx, appinfo->window,
 		fractolinfo->imageinfo->image, 0, 0);
@@ -150,7 +185,7 @@ void	start_app(char *name)
 	t_fractolinfo	*fractolinfo;
 
 	appinfo = init_app(name);
-	fractolinfo = init_fractolinfo(name, 100, appinfo);
+	fractolinfo = init_fractolinfo(name, 1000, appinfo);
 	draw_app(appinfo, fractolinfo);	mlx_loop(appinfo->mlx);
 }
 

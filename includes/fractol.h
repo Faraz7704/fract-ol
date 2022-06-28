@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/27 16:18:56 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/28 20:15:07 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ typedef struct s_color
 	int8_t	channel[4];
 }	t_color;
 
-typedef struct s_viewport
+typedef struct s_rect
 {
 	t_vector2		pos;
 	t_vector2		size;
-}	t_viewport;
+}	t_rect;
 
 typedef struct s_imageinfo
 {
