@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/28 20:15:07 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/30 18:19:41 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <math.h>
 # include <stdint.h>
 
-# define WIDTH		1000
-# define HEIGHT		1000
+# define WIDTH		800
+# define HEIGHT		800
 
 typedef struct s_vector2
 {

@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/28 20:36:18 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/30 18:40:27 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_appinfo	*init_app(char *name)
 
 void	put_pixel(t_imageinfo *info, t_vector2 pixel, t_color color)
 {
-	int		pixel_pos;
+	int	pixel_pos;
 
 	pixel_pos = (pixel.y * info->line_length)
 		+ (pixel.x * (info->bits_per_pixel / 8));
@@ -84,7 +84,7 @@ t_color	get_color(t_vector2 pixel, int iteration, int max_iteration)
 	if (iteration == max_iteration)
 		return (create_trgb(0, 0, 0, 0));
 	t = iteration;// / max_iteration;
-	return (create_trgb(0, t * 255, t * 255, t * 255));
+	return (create_trgb(0, 235, 64, 52));
 }
 
 t_vector2	init_vector2(double x, double y)
@@ -105,25 +105,27 @@ t_rect	init_rect(double x, double y, double w, double h)
 	return (rect);
 }
 
+static double	min(double num1, double num2)
+{
+	if (num1 < num2)
+		return (num1);
+	return (num2);
+}
+
 static t_vector2	get_pixel_scaled(t_vector2 pixel, t_rect viewport)
 {
 	t_vector2	pixel_scaled;
-	int			scale_factor;
-	int			viewport_ratio;
-	int			screen_ratio;
+	double		ratio;
 
-	viewport_ratio = viewport.size.x / viewport.size.y;
-	screen_ratio = WIDTH / HEIGHT;
-	if (screen_ratio > viewport_ratio)
-		scale_factor = HEIGHT / viewport.size.y;
-	else
-		scale_factor = WIDTH / viewport.size.x;
-	pixel_scaled.x = (pixel.x / scale_factor) + viewport.pos.x;
-	pixel_scaled.y = (pixel.y / scale_factor) + viewport.pos.y;
+	ratio = min(WIDTH / viewport.size.x, HEIGHT / viewport.size.y);
+	pixel_scaled.x = ((pixel.x - ((WIDTH - viewport.size.x * ratio) / 2))
+			+ viewport.pos.x * ratio) / ratio;
+	pixel_scaled.y = ((pixel.y - ((HEIGHT - viewport.size.y * ratio) / 2))
+			+ viewport.pos.y * ratio) / ratio;
 	return (pixel_scaled);
 }
 
-int	put_rectangle(t_vector2 pixel, t_rect viewport, int max_iteration)
+int	get_rectangle(t_vector2 pixel, t_rect viewport, int max_iteration)
 {
 	t_vector2	pixel_scaled;
 
@@ -134,7 +136,7 @@ int	put_rectangle(t_vector2 pixel, t_rect viewport, int max_iteration)
 	return (1);
 }
 
-int	put_mandelbrot(t_vector2 pixel, t_rect viewport, int max_iteration)
+int	get_mandelbrot(t_vector2 pixel, t_rect viewport, int max_iteration)
 {
 	int			iteration;
 	double		xtemp;
@@ -167,8 +169,11 @@ static void	draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 		pixel.x = 0;
 		while (pixel.x < WIDTH)
 		{
-			iteration = put_rectangle(pixel, init_rect(0, 0, 1, 1), fractolinfo->max_iteration);
-			// iteration = put_mandelbrot(pixel, init_rect(0, 0, 1.53, 2.24), fractolinfo->max_iteration);
+			// iteration = get_rectangle(pixel, init_rect(0, 0, 20, 20), fractolinfo->max_iteration);
+			iteration = get_mandelbrot(
+					pixel,
+					init_rect(-2.25, -1.37, 2.97, 2.74),
+					fractolinfo->max_iteration);
 			color = get_color(pixel, iteration, fractolinfo->max_iteration);
 			put_pixel(fractolinfo->imageinfo, pixel, color);
 			pixel.x++;
@@ -185,7 +190,7 @@ void	start_app(char *name)
 	t_fractolinfo	*fractolinfo;
 
 	appinfo = init_app(name);
-	fractolinfo = init_fractolinfo(name, 1000, appinfo);
+	fractolinfo = init_fractolinfo(name, 100, appinfo);
 	draw_app(appinfo, fractolinfo);	mlx_loop(appinfo->mlx);
 }
 
