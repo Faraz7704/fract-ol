@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   rectangle.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/30 21:36:19 by fkhan            ###   ########.fr       */
+/*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
+/*   Updated: 2022/06/30 21:35:05 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	exit_app(void *param)
+int	get_rectangle(t_vector2 pixel, t_rect viewport, int max_iteration)
 {
-	(void)param;
-	exit(0);
-}
+	t_vector2	pixel_scaled;
 
-void	start_app(char *name)
-{
-	t_appinfo		*appinfo;
-	t_fractolinfo	*fractolinfo;
-
-	appinfo = init_app(name);
-	fractolinfo = init_fractolinfo(name, 100, appinfo);
-	mlx_hook(appinfo->window, 17, 0, exit_app, NULL);
-	draw_app(appinfo, fractolinfo);
-	mlx_loop(appinfo->mlx);
-}
-
-int	main(int ac, char **av)
-{
-	(void)ac;
-	(void)av;
-	start_app("Mandelbrot");
-	return (0);
+	pixel_scaled = get_pixel_scaled(pixel, viewport);
+	if (pixel_scaled.x >= 0 && pixel_scaled.x < viewport.size.x
+		&& pixel_scaled.y >= 0 && pixel_scaled.y < viewport.size.y)
+		return (max_iteration);
+	return (1);
 }

@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/30 21:36:19 by fkhan            ###   ########.fr       */
+/*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
+/*   Updated: 2022/06/30 21:31:51 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	exit_app(void *param)
+t_vector2	init_vector2(double x, double y)
 {
-	(void)param;
-	exit(0);
+	t_vector2	vector2;
+
+	vector2.x = x;
+	vector2.y = y;
+	return (vector2);
 }
 
-void	start_app(char *name)
+t_rect	init_rect(double x, double y, double w, double h)
 {
-	t_appinfo		*appinfo;
-	t_fractolinfo	*fractolinfo;
+	t_rect	rect;
 
-	appinfo = init_app(name);
-	fractolinfo = init_fractolinfo(name, 100, appinfo);
-	mlx_hook(appinfo->window, 17, 0, exit_app, NULL);
-	draw_app(appinfo, fractolinfo);
-	mlx_loop(appinfo->mlx);
+	rect.pos = init_vector2(x, y);
+	rect.size = init_vector2(w, h);
+	return (rect);
 }
 
-int	main(int ac, char **av)
+double	min(double num1, double num2)
 {
-	(void)ac;
-	(void)av;
-	start_app("Mandelbrot");
-	return (0);
+	if (num1 < num2)
+		return (num1);
+	return (num2);
 }

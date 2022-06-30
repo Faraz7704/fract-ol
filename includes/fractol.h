@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/30 18:19:41 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/06/30 21:40:23 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,33 @@ typedef struct s_appinfo
 	void	*window;
 }	t_appinfo;
 
-// Colors
-t_color	create_trgb(int t, int r, int g, int b);
+// init
+t_appinfo		*init_app(char *name);
+t_fractolinfo	*init_fractolinfo(char *name, int max_iteration,
+					t_appinfo *appinfo);
+t_imageinfo		*init_imageinfo(void *mlx);
+
+// render
+void			draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
+t_vector2		get_pixel_scaled(t_vector2 pixel, t_rect viewport);
+
+// math_utils
+t_vector2		init_vector2(double x, double y);
+t_rect			init_rect(double x, double y, double w, double h);
+double			min(double num1, double num2);
+
+// mandelbrot
+int				get_mandelbrot(t_vector2 pixel, t_rect viewport,
+					int max_iteration);
+
+// rectangle
+int				get_rectangle(t_vector2 pixel, t_rect viewport,
+					int max_iteration);
+
+// colors
+t_color			create_trgb(int t, int r, int g, int b);
+int				get_numcolor(t_color color);
+t_color			get_fractol_color(t_vector2 pixel, int iteration,
+					int max_iteration);
 
 #endif
