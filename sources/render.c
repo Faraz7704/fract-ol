@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/30 21:37:01 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/02 15:42:54 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,7 @@ t_vector2	get_pixel_scaled(t_vector2 pixel, t_rect viewport)
 	return (pixel_scaled);
 }
 
-static int	get_fractol_iteration(t_fractolinfo *fractolinfo, t_vector2	pixel)
-{
-	int			iteration;
-
-	if (!ft_strncmp(fractolinfo->name, "Mandelbrot", 10))
-	{
-		iteration = get_mandelbrot(pixel,
-				init_rect(-2.25, -1.37, 2.97, 2.74),
-				fractolinfo->max_iteration);
-	}
-	else
-		iteration = fractolinfo->max_iteration;
-	return (iteration);
-}
-
-void	draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
+void	draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 {
 	t_vector2	pixel;
 	int			iteration;
@@ -61,9 +46,11 @@ void	draw_app(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 		pixel.x = 0;
 		while (pixel.x < WIDTH)
 		{
-			iteration = get_fractol_iteration(fractolinfo, pixel);
-			color = get_fractol_color(pixel, iteration,
-					fractolinfo->max_iteration);
+			if (fractolinfo->formula)
+				iteration = fractolinfo->formula(fractolinfo, pixel);
+			else
+				iteration = fractolinfo->max_iteration;
+			color = get_fractol_color(fractolinfo, pixel, iteration);
 			put_pixel(fractolinfo->imageinfo, pixel, get_numcolor(color));
 			pixel.x++;
 		}

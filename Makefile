@@ -6,7 +6,7 @@
 #    By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 11:40:15 by fkhan             #+#    #+#              #
-#    Updated: 2022/06/30 21:35:56 by fkhan            ###   ########.fr        #
+#    Updated: 2022/07/02 15:44:45 by fkhan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ HEADERS_LIST 		= fractol.h debug_log.h
 HEADERS 			= $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY 	= ./sources/
-SOURCES_LIST 		= fractol.c debug_log.c init.c render.c math_utils.c mandelbrot.c rectangle.c colors.c
+SOURCES_LIST 		= fractol.c debug_log.c init.c render.c math_utils.c \
+						mandelbrot.c rectangle.c colors.c string_utils.c
 SOURCES 			= $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
 OBJECTS_DIRECTORY 	= objects/

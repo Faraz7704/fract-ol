@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/30 21:28:15 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/02 15:17:50 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ t_imageinfo	*init_imageinfo(void *mlx)
 	return (info);
 }
 
+void	init_formula(t_fractolinfo	*info)
+{
+	if (str_equal(info->name, "Mandelbrot"))
+	{
+		info->viewport = init_rect(-2.25, -1.37, 2.97, 2.74);
+		info->formula = &get_mandelbrot;
+	}
+	else if (str_equal(info->name, "Rectangle"))
+	{
+		info->viewport = init_rect(0, 0, 50, 35);
+		info->formula = &get_rectangle;
+	}
+	else
+		info->formula = NULL;
+}
+
 t_fractolinfo	*init_fractolinfo(char *name, int max_iteration,
 	t_appinfo *appinfo)
 {
@@ -41,6 +57,7 @@ t_fractolinfo	*init_fractolinfo(char *name, int max_iteration,
 	info->name = name;
 	info->imageinfo = init_imageinfo(appinfo->mlx);
 	info->max_iteration = max_iteration;
+	init_formula(info);
 	return (info);
 }
 
