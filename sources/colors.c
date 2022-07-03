@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/03 11:33:37 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/03 11:40:54 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ t_color	lerp_color(t_color a, t_color b, double t)
 t_color	gradient_color(int i, int max, t_palette palette)
 {
 	double	index;
+	int		size;
 	double	t;
-	int		c;
 
 	index = i / max;
-	c = palette.size - 1;
-	t = fmod(index, 1.0f / c) * c;
-	return (lerp_color(palette.colors[(int)(index * c) + 1],
-		palette.colors[(int)(index * c)],
+	size = palette.size - 1;
+	t = fmod(index, 1.0f / size) * size;
+	return (lerp_color(palette.colors[(int)(index * size) + 1],
+		palette.colors[(int)(index * size)],
 		(int)((t + 1) - t))
 	);
 }
