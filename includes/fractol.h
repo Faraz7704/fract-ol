@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/02 15:43:13 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/03 11:22:25 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <math.h>
 # include <stdint.h>
 
-# define WIDTH		800
-# define HEIGHT		800
+# define WIDTH		300
+# define HEIGHT		300
 
 typedef struct s_vector2
 {
@@ -33,6 +33,12 @@ typedef struct s_color
 {
 	int8_t	channel[4];
 }	t_color;
+
+typedef struct s_palette
+{
+	t_color	*colors;
+	int		size;
+}	t_palette;
 
 typedef struct s_rect
 {
