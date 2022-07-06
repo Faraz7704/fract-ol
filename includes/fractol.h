@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/03 11:22:25 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/06 19:00:26 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <math.h>
 # include <stdint.h>
 
-# define WIDTH		300
-# define HEIGHT		300
+# define WIDTH		1000
+# define HEIGHT		1000
 
 typedef struct s_vector2
 {
@@ -62,6 +62,8 @@ typedef struct s_fractolinfo
 	int				max_iteration;
 	t_rect			viewport;
 	int				(*formula)(struct s_fractolinfo *, t_vector2);
+	double			zoom;
+	t_vector2		offset;
 }	t_fractolinfo;
 
 typedef struct s_appinfo
@@ -70,15 +72,44 @@ typedef struct s_appinfo
 	void	*window;
 }	t_appinfo;
 
+typedef struct s_event_data
+{
+	t_appinfo		*appinfo;
+	t_fractolinfo	*fractolinfo;
+}	t_event_data;
+
+enum {
+	ON_MOUSE_SCROLL_UP = 4,
+	ON_MOUSE_SCROLL_DOWN = 5,
+	ON_ARROW_LEFT = 123,
+	ON_ARROW_RIGHT = 124,
+	ON_ARROW_UP = 126,
+	ON_ARROW_DOWN = 125,
+	ON_KEY_PLUS = 24,
+	ON_KEY_MINUS = 27,
+	ON_NUMPAD_PLUS = 69,
+	ON_NUMPAD_MINUS = 78,
+	ON_KEY_ESC = 53,
+	ON_KEY_H = 4,
+	ON_KEY_R = 15,
+};
+
+// fractol
+int				exit_app(t_event_data *event_data);
+t_event_data	init_event_data(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
+
 // init
 t_appinfo		*init_app(char *name);
 t_fractolinfo	*init_fractolinfo(char *name, int max_iteration,
 					t_appinfo *appinfo);
 t_imageinfo		*init_imageinfo(void *mlx);
+void			fractol_reset(t_fractolinfo	*info);
 
 // render
 void			draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
-t_vector2		get_pixel_scaled(t_vector2 pixel, t_rect viewport);
+t_vector2		get_pixel_scaled(t_vector2 pixel, t_rect viewport,
+					t_vector2 offset);
+void			draw_help(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
 
 // math_utils
 t_vector2		init_vector2(double x, double y);
@@ -99,5 +130,12 @@ t_color			create_trgb(int t, int r, int g, int b);
 int				get_numcolor(t_color color);
 t_color			get_fractol_color( t_fractolinfo *info, t_vector2 pixel,
 					int iteration);
+
+// mouse
+int				mouse_down_handler(int button, int x, int y,
+					t_event_data *data);
+
+// keyboard
+int				key_down_handler(int button, t_event_data	*data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/02 15:42:54 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/06 18:39:48 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,37 @@ static void	put_pixel(t_imageinfo *info, t_vector2 pixel, int color)
 	*(unsigned int *)&info->addr[pixel_pos] = color;
 }
 
-t_vector2	get_pixel_scaled(t_vector2 pixel, t_rect viewport)
+t_vector2	get_pixel_scaled(t_vector2 pixel, t_rect viewport, t_vector2 offset)
 {
 	t_vector2	pixel_scaled;
 	double		ratio;
 
 	ratio = min(WIDTH / viewport.size.x, HEIGHT / viewport.size.y);
 	pixel_scaled.x = ((pixel.x - ((WIDTH - viewport.size.x * ratio) / 2))
-			+ viewport.pos.x * ratio) / ratio;
+			+ viewport.pos.x * ratio) / ratio + (offset.x / ratio);
 	pixel_scaled.y = ((pixel.y - ((HEIGHT - viewport.size.y * ratio) / 2))
-			+ viewport.pos.y * ratio) / ratio;
+			+ viewport.pos.y * ratio) / ratio + (offset.y / ratio);
 	return (pixel_scaled);
 }
 
 void	draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 {
 	t_vector2	pixel;
+	t_vector2	delta_pixel;
 	int			iteration;
 	t_color		color;
 
+	if (!fractolinfo->formula)
+		(void)draw_help(appinfo, fractolinfo);
 	pixel.y = 0;
 	while (pixel.y < HEIGHT)
 	{
 		pixel.x = 0;
 		while (pixel.x < WIDTH)
 		{
-			if (fractolinfo->formula)
-				iteration = fractolinfo->formula(fractolinfo, pixel);
-			else
-				iteration = fractolinfo->max_iteration;
+			delta_pixel = init_vector2(pixel.x * fractolinfo->zoom,
+					pixel.y * fractolinfo->zoom);
+			iteration = fractolinfo->formula(fractolinfo, delta_pixel);
 			color = get_fractol_color(fractolinfo, pixel, iteration);
 			put_pixel(fractolinfo->imageinfo, pixel, get_numcolor(color));
 			pixel.x++;
@@ -58,4 +60,28 @@ void	draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 	}
 	mlx_put_image_to_window(appinfo->mlx, appinfo->window,
 		fractolinfo->imageinfo->image, 0, 0);
+	mlx_string_put(appinfo->mlx, appinfo->window, 10, 20, 0xCCCCCC,
+		"H - Help");
+}
+
+void	draw_help(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
+{
+	ft_bzero(fractolinfo->imageinfo->addr,
+		WIDTH * HEIGHT * (fractolinfo->imageinfo->bits_per_pixel / 8));
+	mlx_put_image_to_window(appinfo->mlx, appinfo->window,
+		fractolinfo->imageinfo->image, 0, 0);
+	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 60,
+		(HEIGHT / 2) - 100, 0xCCCCCC, "Controls");
+	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 60,
+		(HEIGHT / 2) - 60, 0xCCCCCC, "Reset          - R");
+	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 60,
+		(HEIGHT / 2) - 30, 0xCCCCCC, "Color Shift    - C");
+	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2 - 60),
+		(HEIGHT / 2) - 0, 0xCCCCCC, "Move           - Arrows");
+	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 60,
+		(HEIGHT / 2) + 30, 0xCCCCCC, "Zoom           - Scroll");
+	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 60,
+		(HEIGHT / 2) + 60, 0xCCCCCC, "Iterations     - +/-");
+	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 60,
+		(HEIGHT / 2) + 110, 0xCCCCCC, "Close Help     - H");
 }

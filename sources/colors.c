@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/03 11:40:54 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/06 17:03:08 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_color	lerp_color(t_color a, t_color b, double t)
 		));
 }
 
-t_color	gradient_color(int i, int max, t_palette palette)
+t_color	linear_color(double i, int max, t_palette palette)
 {
 	double	index;
 	int		size;
@@ -48,9 +48,9 @@ t_color	gradient_color(int i, int max, t_palette palette)
 	index = i / max;
 	size = palette.size - 1;
 	t = fmod(index, 1.0f / size) * size;
-	return (lerp_color(palette.colors[(int)(index * size) + 1],
-		palette.colors[(int)(index * size)],
-		(int)((t + 1) - t))
+	return (lerp_color(palette.colors[(int)(index * size)],
+		palette.colors[(int)(index * size) + 1],
+		t)
 	);
 }
 
@@ -66,12 +66,12 @@ t_color	get_fractol_color(t_fractolinfo *info, t_vector2 pixel, int iteration)
 	palette.colors = malloc(sizeof(t_palette) * palette.size);
 	if (!palette.colors)
 		return (create_trgb(0, 255, 255, 255));
-	palette.colors[0] = create_trgb(0, 127, 22, 55);
+	palette.colors[0] = create_trgb(0, 100, 45, 120);
 	palette.colors[1] = create_trgb(0, 4, 120, 120);
-	palette.colors[2] = create_trgb(0, 255, 183, 51);
-	palette.colors[3] = create_trgb(0, 245, 115, 54);
-	palette.colors[4] = create_trgb(0, 194, 33, 33);
-	color = gradient_color(iteration, info->max_iteration, palette);
+	palette.colors[2] = create_trgb(0, 4, 120, 120);
+	palette.colors[3] = create_trgb(0, 34, 24, 72);
+	palette.colors[4] = create_trgb(0, 34, 24, 72);
+	color = linear_color((double)iteration, info->max_iteration, palette);
 	free(palette.colors);
 	return (color);
 }
