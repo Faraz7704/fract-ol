@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/06 18:58:11 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/08 14:05:06 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,15 @@ void	init_formula(t_fractolinfo	*info)
 		info->viewport = init_rect(-2.00, -1.12, 2.47, 2.24);
 		info->formula = &get_mandelbrot;
 	}
+	else if (str_equal(info->name, "Julia set"))
+	{
+		info->viewport = init_rect(-3, -3, 6, 6);
+		info->complex = init_vector2(-0.835f, -0.2321f);
+		info->formula = &get_julia_set;
+	}
 	else if (str_equal(info->name, "Rectangle"))
 	{
-		info->viewport = init_rect(0, 0, 50, 35);
+		info->viewport = init_rect(0, 0, 35, 50);
 		info->formula = &get_rectangle;
 	}
 	else

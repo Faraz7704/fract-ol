@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/06 19:00:26 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/08 14:02:28 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # include <math.h>
 # include <stdint.h>
 
-# define WIDTH		1000
-# define HEIGHT		1000
+# define WIDTH			700
+# define HEIGHT			700
+# define ZOOM_FACTOR 	1.1
 
 typedef struct s_vector2
 {
@@ -64,6 +65,8 @@ typedef struct s_fractolinfo
 	int				(*formula)(struct s_fractolinfo *, t_vector2);
 	double			zoom;
 	t_vector2		offset;
+	t_vector2		mouse_pos;
+	t_vector2		complex;
 }	t_fractolinfo;
 
 typedef struct s_appinfo
@@ -107,8 +110,8 @@ void			fractol_reset(t_fractolinfo	*info);
 
 // render
 void			draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
-t_vector2		get_pixel_scaled(t_vector2 pixel, t_rect viewport,
-					t_vector2 offset);
+t_vector2		get_pixel_scaled(t_vector2 pixel, t_rect viewport, t_vector2 offset);
+t_vector2		get_pixel_zoomed(t_vector2 pixel, t_rect viewport, double zoom, t_vector2 offset);
 void			draw_help(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
 
 // math_utils
@@ -121,6 +124,9 @@ int				str_equal(char *str1, char *str2);
 
 // mandelbrot
 int				get_mandelbrot(t_fractolinfo *info, t_vector2 pixel);
+
+// julia_set
+int				get_julia_set(t_fractolinfo *info, t_vector2 pixel);
 
 // rectangle
 int				get_rectangle(t_fractolinfo *info, t_vector2 pixel);

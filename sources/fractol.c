@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/06 19:00:16 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/07 01:04:19 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	exit_app(t_event_data *event_data)
 {
-	(void)event_data;
+	free(event_data->fractolinfo->imageinfo);
+	free(event_data->fractolinfo);
+	free(event_data->appinfo->mlx);
+	free(event_data->appinfo->window);
+	free(event_data->appinfo);
 	exit(0);
 }
 
@@ -51,8 +55,7 @@ void	start_app(char *name)
 
 int	main(int ac, char **av)
 {
-	(void)av;
-	if (ac > 1)
+	if (ac == 2)
 		start_app(av[1]);
 	return (0);
 }

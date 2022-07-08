@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia_set.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/07 00:16:08 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/08 14:03:09 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	get_mandelbrot(t_fractolinfo *info, t_vector2 pixel)
+int	get_julia_set(t_fractolinfo *info, t_vector2 pixel)
 {
 	int			iteration;
 	double		xtemp;
 	t_vector2	pixel_scaled;
 
-
-	pixel_scaled = get_pixel_zoomed(pixel, info->viewport, info->zoom, info->offset);
-	pixel_scaled = get_pixel_scaled(pixel_scaled, info->viewport, info->offset);
-	pixel.x = 0;
-	pixel.y = 0;
+	// pixel_scaled = get_pixel_zoomed(pixel, info->viewport, info->zoom, info->offset);
+	pixel_scaled = get_pixel_scaled(pixel, info->viewport, info->offset);
 	iteration = 0;
-	while ((pixel.x * pixel.x) + (pixel.y * pixel.y) <= 4
+	while ((pixel_scaled.x * pixel_scaled.x) + (pixel_scaled.y * pixel_scaled.y) <= 4
 		&& iteration < info->max_iteration)
 	{
-		xtemp = (pixel.x * pixel.x) - (pixel.y * pixel.y) + pixel_scaled.x;
-		pixel.y = (2 * pixel.x * pixel.y) + pixel_scaled.y;
-		pixel.x = xtemp;
+		xtemp = (pixel_scaled.x * pixel_scaled.x) - (pixel_scaled.y * pixel_scaled.y) + info->complex.x;
+		pixel_scaled.y = (2 * pixel_scaled.x * pixel_scaled.y) + info->complex.y;
+		pixel_scaled.x = xtemp;
 		iteration++;
 	}
 	return (iteration);
