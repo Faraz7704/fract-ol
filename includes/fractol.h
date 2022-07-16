@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/08 14:02:28 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/16 19:26:26 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_fractolinfo
 	double			zoom;
 	t_vector2		offset;
 	t_vector2		mouse_pos;
+	t_vector2		zoomed_pos;
 	t_vector2		complex;
 }	t_fractolinfo;
 
@@ -111,7 +112,7 @@ void			fractol_reset(t_fractolinfo	*info);
 // render
 void			draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
 t_vector2		get_pixel_scaled(t_vector2 pixel, t_rect viewport, t_vector2 offset);
-t_vector2		get_pixel_zoomed(t_vector2 pixel, t_rect viewport, double zoom, t_vector2 offset);
+t_vector2		get_pixel_zoomed(t_vector2 pixel, double zoom, t_vector2 offset, t_vector2 prev_offset);
 void			draw_help(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
 
 // math_utils

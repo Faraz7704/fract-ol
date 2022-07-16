@@ -6,11 +6,12 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/11 15:55:42 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/16 21:39:36 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdio.h>
 
 static void	put_pixel(t_imageinfo *info, t_vector2 pixel, int color)
 {
@@ -34,16 +35,19 @@ t_vector2	get_pixel_scaled(t_vector2 pixel, t_rect viewport, t_vector2 offset)
 	return (pixel_scaled);
 }
 
-t_vector2	get_pixel_zoomed(t_vector2 pixel, t_rect viewport, double zoom, t_vector2 offset)
+t_vector2	get_pixel_zoomed(t_vector2 pixel, double zoom, t_vector2 offset, t_vector2 prev_offset)
 {
-	t_vector2	zoom_size;
 	t_vector2	pixel_zoomed;
 
-	(void)offset;
-	zoom_size.x = WIDTH / viewport.size.x * zoom;
-	zoom_size.y = HEIGHT / viewport.size.y * zoom;
-	pixel_zoomed.x = (pixel.x - ((WIDTH - viewport.size.x) / 2)) * zoom;
-	pixel_zoomed.y = (pixel.y - ((HEIGHT - viewport.size.y) / 2)) * zoom;
+	(void)prev_offset;
+	// offset.x *= (prev_offset.x / zoom);
+	// offset.y *= (prev_offset.y / zoom);
+	pixel.x -= (offset.x - prev_offset.x);
+	pixel.y -= (offset.y - prev_offset.y);
+	pixel_zoomed.x = (pixel.x - offset.x) * zoom;
+	pixel_zoomed.y = (pixel.y - offset.y) * zoom;
+	pixel_zoomed.x += offset.x;
+	pixel_zoomed.y += offset.y;
 	return (pixel_zoomed);
 }
 
@@ -68,6 +72,7 @@ void	draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 		}
 		pixel.y++;
 	}
+	fractolinfo->zoomed_pos = init_vector2(fractolinfo->mouse_pos.x, fractolinfo->mouse_pos.y);
 	mlx_put_image_to_window(appinfo->mlx, appinfo->window,
 		fractolinfo->imageinfo->image, 0, 0);
 	mlx_string_put(appinfo->mlx, appinfo->window, 10, 20, 0xCCCCCC,

@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/07 00:16:08 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/16 18:52:13 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	get_mandelbrot(t_fractolinfo *info, t_vector2 pixel)
 	double		xtemp;
 	t_vector2	pixel_scaled;
 
-
-	pixel_scaled = get_pixel_zoomed(pixel, info->viewport, info->zoom, info->offset);
+	pixel_scaled = get_pixel_zoomed(pixel, info->zoom, info->mouse_pos, info->zoomed_pos);
 	pixel_scaled = get_pixel_scaled(pixel_scaled, info->viewport, info->offset);
 	pixel.x = 0;
 	pixel.y = 0;
