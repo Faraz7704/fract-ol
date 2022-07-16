@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Fri Jul  8 13:43:17 2022
+# Make data base, printed on Sat Jul 16 16:39:10 2022
 
 # Variables
 
@@ -20,8 +20,6 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 SOURCES_LIST = fractol.c debug_log.c init.c render.c math_utils.c mandelbrot.c julia_set.c rectangle.c colors.c string_utils.c mouse.c keyboard.c
 # makefile (from `Makefile', line 28)
 FT_PRINTF = $(FT_PRINTF_DIRECTORY)libft_printf.a
-# environment
-VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
@@ -44,16 +42,12 @@ _ = /usr/bin/make
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 44)
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
-# environment
-VSCODE_VERBOSE_LOGGING = true
 # makefile (from `Makefile', line 46)
 OBJECTS_DIRECTORY = objects/
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # makefile (from `Makefile', line 33)
 MINILIBX_DIRECTORY = $(LIB_DIRECTORY)minilibx_opengl/
-# environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/ry/tbxdcn2x34q_gjw4rn0_gv700000gn/T/vscode-ipc-68dc2b32-b4bf-4600-bd5e-3fef98bc7aef.sock
 # environment
 VSCODE_CWD = /
 # makefile (from `Makefile', line 30)
@@ -64,8 +58,6 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.d
 FT_PRINTF_DIRECTORY = $(LIB_DIRECTORY)ft_printf/
 # environment
 rvm_stored_umask = 0022
-# environment
-VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
@@ -81,8 +73,6 @@ HEADERS_LIST = fractol.h debug_log.h
 # makefile (from `Makefile', line 40)
 SOURCES_DIRECTORY = ./sources/
 # environment
-VSCODE_PIPE_LOGGING = true
-# environment
 rvm_bin_path = /Users/faraz/.rvm/bin
 # environment
 PWD = /Users/faraz/Documents/Documents/42/cursus/fract-ol
@@ -97,7 +87,7 @@ HOME = /Users/faraz
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/faraz/Library/Application Support/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
+VSCODE_CODE_CACHE_PATH = /Users/faraz/Library/Application Support/Code/CachedData/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
 # environment
 LOGNAME = faraz
 # environment
@@ -145,7 +135,9 @@ TMPDIR = /var/folders/ry/tbxdcn2x34q_gjw4rn0_gv700000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/faraz/Library/Application Support/Code/1.68.1-main.sock
+VSCODE_IPC_HOOK = /Users/faraz/Library/Application Support/Code/1.69.1-main.sock
+# environment
+MallocNanoZone = 0
 # makefile (from `Makefile', line 52)
 RED = \033[0;31m
 # makefile
@@ -155,7 +147,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.119650752.119650758
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.120871696.120871702
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # makefile (from `Makefile', line 36)
@@ -192,6 +184,7 @@ rvm_prefix = /Users/faraz
 SUFFIXES := 
 # makefile (from `Makefile', line 15)
 FLAGS = -Wall -Werror -Wextra
+ 
 # default
 .INCLUDE_DIRS = /usr/local/include
 # environment
@@ -203,9 +196,9 @@ OBJECTS = $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3714
+VSCODE_PID = 54037
 # variable set hash-table stats:
-# Load=96/1024=9%, Rehash=0, Collisions=5/151=3%
+# Load=92/1024=9%, Rehash=0, Collisions=5/147=3%
 
 # Pattern-specific Variable Values
 
@@ -228,7 +221,6 @@ objects/%.o: ./sources/%.c ./includes/fractol.h ./includes/debug_log.h
 	
 
 # 1 implicit rules, 0 (0.0%) terminal.
- 
 
 # Files
 
@@ -243,7 +235,7 @@ sources/fractol.c:
 
 fractol: lib/libft/libft.a lib/ft_printf/libft_printf.a lib/minilibx_opengl/libmlx.a objects/ objects/fractol.o objects/debug_log.o objects/init.o objects/render.o objects/math_utils.o objects/mandelbrot.o objects/julia_set.o objects/rectangle.o objects/colors.o objects/string_utils.o objects/mouse.o objects/keyboard.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-07 01:04:24
+#  Last modified 2022-07-11 15:55:45
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -256,7 +248,7 @@ fractol: lib/libft/libft.a lib/ft_printf/libft_printf.a lib/minilibx_opengl/libm
 
 objects/:
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-07 01:04:24
+#  Last modified 2022-07-11 15:55:45
 #  File has been updated.
 #  Successfully updated.
 #  commands to execute (from `Makefile', line 65):
@@ -267,7 +259,7 @@ objects/:
 objects/mouse.o: sources/mouse.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `mouse'
-#  Last modified 2022-07-07 00:56:06
+#  Last modified 2022-07-08 14:04:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -280,7 +272,7 @@ objects/mouse.o: sources/mouse.c includes/fractol.h includes/debug_log.h
 objects/render.o: sources/render.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `render'
-#  Last modified 2022-07-07 00:55:33
+#  Last modified 2022-07-11 15:55:45
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -293,7 +285,7 @@ objects/render.o: sources/render.c includes/fractol.h includes/debug_log.h
 objects/string_utils.o: sources/string_utils.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `string_utils'
-#  Last modified 2022-07-07 00:56:06
+#  Last modified 2022-07-08 14:04:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -321,7 +313,7 @@ all: fractol
 # Not a target:
 sources/render.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-07 00:46:12
+#  Last modified 2022-07-11 15:55:42
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -339,7 +331,7 @@ sources/string_utils.c:
 objects/init.o: sources/init.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `init'
-#  Last modified 2022-07-07 01:01:24
+#  Last modified 2022-07-11 15:52:53
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -377,7 +369,7 @@ Makefile:
 # Not a target:
 sources/init.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-07 01:01:22
+#  Last modified 2022-07-11 15:50:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -404,7 +396,7 @@ sources/mouse.c:
 # Not a target:
 includes/fractol.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-07 00:48:49
+#  Last modified 2022-07-08 14:02:28
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -419,7 +411,7 @@ bonus: all
 objects/math_utils.o: sources/math_utils.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `math_utils'
-#  Last modified 2022-07-07 00:55:33
+#  Last modified 2022-07-08 14:04:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -457,10 +449,11 @@ sources/math_utils.c:
 objects/julia_set.o: sources/julia_set.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `julia_set'
-#  Last modified 2022-07-07 01:00:10
+#  Last modified 2022-07-11 15:54:34
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
+ 
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 #  commands to execute (from `Makefile', line 69):
 	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
@@ -470,7 +463,7 @@ objects/julia_set.o: sources/julia_set.c includes/fractol.h includes/debug_log.h
 objects/rectangle.o: sources/rectangle.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `rectangle'
-#  Last modified 2022-07-07 00:56:05
+#  Last modified 2022-07-08 14:04:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -483,8 +476,7 @@ objects/rectangle.o: sources/rectangle.c includes/fractol.h includes/debug_log.h
 # Not a target:
 sources/julia_set.c:
 #  Implicit rule search has been done.
- 
-#  Last modified 2022-07-07 01:00:07
+#  Last modified 2022-07-11 15:54:32
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -531,7 +523,7 @@ clean:
 objects/mandelbrot.o: sources/mandelbrot.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `mandelbrot'
-#  Last modified 2022-07-07 00:55:33
+#  Last modified 2022-07-08 14:04:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -563,7 +555,7 @@ lib/minilibx_opengl/libmlx.a:
 objects/colors.o: sources/colors.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `colors'
-#  Last modified 2022-07-07 00:56:06
+#  Last modified 2022-07-08 14:04:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -576,7 +568,7 @@ objects/colors.o: sources/colors.c includes/fractol.h includes/debug_log.h
 objects/keyboard.o: sources/keyboard.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `keyboard'
-#  Last modified 2022-07-07 00:56:06
+#  Last modified 2022-07-08 14:04:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -617,7 +609,7 @@ lib/libft/libft.a:
 objects/debug_log.o: sources/debug_log.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `debug_log'
-#  Last modified 2022-07-07 00:55:33
+#  Last modified 2022-07-08 14:03:47
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -630,7 +622,7 @@ objects/debug_log.o: sources/debug_log.c includes/fractol.h includes/debug_log.h
 objects/fractol.o: sources/fractol.c includes/fractol.h includes/debug_log.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `fractol'
-#  Last modified 2022-07-07 01:04:24
+#  Last modified 2022-07-08 14:03:47
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -651,7 +643,6 @@ sources/debug_log.c:
 
 # files hash-table stats:
 # Load=40/1024=4%, Rehash=0, Collisions=3/161=2%
- 
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -663,6 +654,6 @@ sources/debug_log.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Jul  8 13:43:17 2022
+# Finished Make data base on Sat Jul 16 16:39:10 2022
 
  

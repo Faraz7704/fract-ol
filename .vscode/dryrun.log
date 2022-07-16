@@ -17,7 +17,6 @@ gcc -Wall -Werror -Wextra -I./includes/ -c sources/ft_isalnum.c -o objects/ft_is
 echo ".\c"
 gcc -Wall -Werror -Wextra -I./includes/ -c sources/ft_tolower.c -o objects/ft_tolower.o
 echo ".\c"
- 
 gcc -Wall -Werror -Wextra -I./includes/ -c sources/ft_toupper.c -o objects/ft_toupper.o
 echo ".\c"
 gcc -Wall -Werror -Wextra -I./includes/ -c sources/ft_strlen.c -o objects/ft_strlen.o
@@ -111,7 +110,6 @@ gcc -Wall -Werror -Wextra -I./includes/ -I../libft/includes/ -c sources/pf_putls
 echo ".\c"
 gcc -Wall -Werror -Wextra -I./includes/ -I../libft/includes/ -c sources/pf_putlnbr_fd.c -o objects/pf_putlnbr_fd.o
 echo ".\c"
- 
 gcc -Wall -Werror -Wextra -I./includes/ -I../libft/includes/ -c sources/ft_digitlen.c -o objects/ft_digitlen.o
 echo ".\c"
 gcc -Wall -Werror -Wextra -I./includes/ -I../libft/includes/ -c sources/pf_putlhex_fd.c -o objects/pf_putlhex_fd.o
@@ -131,13 +129,13 @@ mv libft.a libft_printf.a
 ar -rcs libft_printf.a objects/ft_printf.o objects/ft_printf_flags.o objects/pf_putlchar_fd.o objects/pf_putlstr_fd.o objects/pf_putlnbr_fd.o objects/ft_digitlen.o objects/pf_putlhex_fd.o objects/pf_putlunbr_fd.o objects/pf_putlptr_fd.o objects/pf_width.o objects/ft_puthex.o objects/ft_hexlen.o
 echo "\nlibft_printf.a: \033[0;32mobject files were created\033[0m"
 echo "libft_printf.a: \033[0;32mlibft_printf.a was created\033[0m"
+ 
 make[1]: Leaving directory `/Users/faraz/Documents/Documents/42/cursus/fract-ol/lib/ft_printf'
 echo "fractol: \033[0;32mCreating ./lib/minilibx_opengl/libmlx.a...\033[0m"
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -sC ./lib/minilibx_opengl/
 make[1]: Entering directory `/Users/faraz/Documents/Documents/42/cursus/fract-ol/lib/minilibx_opengl'
 cc -O2 -DSTRINGPUTX11 -w   -c -o mlx_shaders.o mlx_shaders.c
 cc -O2 -DSTRINGPUTX11 -w   -c -o mlx_new_window.o mlx_new_window.m
- 
 cc -O2 -DSTRINGPUTX11 -w   -c -o mlx_init_loop.o mlx_init_loop.m
 cc -O2 -DSTRINGPUTX11 -w   -c -o mlx_new_image.o mlx_new_image.m
 cc -O2 -DSTRINGPUTX11 -w   -c -o mlx_xpm.o mlx_xpm.c
@@ -151,6 +149,7 @@ mkdir -p objects/
 echo "fractol: \033[0;32mobjects/ was created\033[0m"
 gcc -Wall -Werror -Wextra -c -I./includes/ -I./lib/libft/includes/ -I./lib/ft_printf/includes/ -I./lib/minilibx_opengl/ sources/fractol.c -o objects/fractol.o
 echo ".\c"
+ 
 gcc -Wall -Werror -Wextra -c -I./includes/ -I./lib/libft/includes/ -I./lib/ft_printf/includes/ -I./lib/minilibx_opengl/ sources/debug_log.c -o objects/debug_log.o
 echo ".\c"
 gcc -Wall -Werror -Wextra -c -I./includes/ -I./lib/libft/includes/ -I./lib/ft_printf/includes/ -I./lib/minilibx_opengl/ sources/init.c -o objects/init.o
@@ -161,6 +160,7 @@ gcc -Wall -Werror -Wextra -c -I./includes/ -I./lib/libft/includes/ -I./lib/ft_pr
 echo ".\c"
 gcc -Wall -Werror -Wextra -c -I./includes/ -I./lib/libft/includes/ -I./lib/ft_printf/includes/ -I./lib/minilibx_opengl/ sources/mandelbrot.c -o objects/mandelbrot.o
 echo ".\c"
+ 
 gcc -Wall -Werror -Wextra -c -I./includes/ -I./lib/libft/includes/ -I./lib/ft_printf/includes/ -I./lib/minilibx_opengl/ sources/julia_set.c -o objects/julia_set.o
 echo ".\c"
 gcc -Wall -Werror -Wextra -c -I./includes/ -I./lib/libft/includes/ -I./lib/ft_printf/includes/ -I./lib/minilibx_opengl/ sources/rectangle.c -o objects/rectangle.o

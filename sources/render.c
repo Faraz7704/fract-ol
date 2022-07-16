@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/07 00:46:12 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/11 15:55:42 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ t_vector2	get_pixel_zoomed(t_vector2 pixel, t_rect viewport, double zoom, t_vect
 	(void)offset;
 	zoom_size.x = WIDTH / viewport.size.x * zoom;
 	zoom_size.y = HEIGHT / viewport.size.y * zoom;
-	pixel_zoomed.x = pixel.x * zoom;
-	pixel_zoomed.y = pixel.y * zoom;
+	pixel_zoomed.x = (pixel.x - ((WIDTH - viewport.size.x) / 2)) * zoom;
+	pixel_zoomed.y = (pixel.y - ((HEIGHT - viewport.size.y) / 2)) * zoom;
 	return (pixel_zoomed);
 }
 
