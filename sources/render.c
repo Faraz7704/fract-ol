@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/16 21:39:36 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/17 12:38:03 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ t_vector2	get_pixel_scaled(t_vector2 pixel, t_rect viewport, t_vector2 offset)
 t_vector2	get_pixel_zoomed(t_vector2 pixel, double zoom, t_vector2 offset, t_vector2 prev_offset)
 {
 	t_vector2	pixel_zoomed;
+	t_vector2	pixel_diff;
 
 	(void)prev_offset;
-	// offset.x *= (prev_offset.x / zoom);
-	// offset.y *= (prev_offset.y / zoom);
-	pixel.x -= (offset.x - prev_offset.x);
-	pixel.y -= (offset.y - prev_offset.y);
+	pixel_diff.x = (offset.x) / WIDTH;
+	pixel_diff.y = (offset.y) / HEIGHT;
+	offset.x = prev_offset.x - (prev_offset.x * pixel_diff.x);
+	offset.y = prev_offset.y - (prev_offset.y * pixel_diff.y);
 	pixel_zoomed.x = (pixel.x - offset.x) * zoom;
 	pixel_zoomed.y = (pixel.y - offset.y) * zoom;
 	pixel_zoomed.x += offset.x;
