@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/16 20:06:29 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/19 21:13:21 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,8 @@ void	fractol_reset(t_fractolinfo	*info)
 	else
 		info->max_iteration = max;
 	info->zoom = 1.0f;
-	info->offset = init_vector2(0, 0);
-	info->zoomed_pos = init_vector2(0, 0);
-	info->mouse_pos = init_vector2(0, 0);
+	info->zoom_offset = init_vector2(0, 0);
+	info->vp_offset = init_vector2(0, 0);
 }
 
 t_fractolinfo	*init_fractolinfo(char *name, int max_iteration,

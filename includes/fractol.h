@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/16 19:26:26 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/19 21:45:04 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdint.h>
+#include <stdio.h>
 
 # define WIDTH			700
 # define HEIGHT			700
@@ -64,9 +65,8 @@ typedef struct s_fractolinfo
 	t_rect			viewport;
 	int				(*formula)(struct s_fractolinfo *, t_vector2);
 	double			zoom;
-	t_vector2		offset;
-	t_vector2		mouse_pos;
-	t_vector2		zoomed_pos;
+	t_vector2		zoom_offset;
+	t_vector2		vp_offset;
 	t_vector2		complex;
 }	t_fractolinfo;
 
@@ -112,7 +112,7 @@ void			fractol_reset(t_fractolinfo	*info);
 // render
 void			draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
 t_vector2		get_pixel_scaled(t_vector2 pixel, t_rect viewport, t_vector2 offset);
-t_vector2		get_pixel_zoomed(t_vector2 pixel, double zoom, t_vector2 offset, t_vector2 prev_offset);
+t_vector2		get_pixel_zoomed(t_vector2 pixel, double zoom, t_vector2 offset);
 void			draw_help(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
 
 // math_utils

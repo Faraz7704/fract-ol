@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/06 19:00:31 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/19 21:13:00 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ static void	move(int button, t_event_data *data)
 {
 	t_vector2	offset;
 
-	offset = data->fractolinfo->offset;
+	offset = data->fractolinfo->vp_offset;
 	if (button == ON_ARROW_LEFT)
-		data->fractolinfo->offset = init_vector2(offset.x - 10, offset.y);
+		data->fractolinfo->vp_offset = init_vector2(offset.x - 10, offset.y);
 	else if (button == ON_ARROW_RIGHT)
-		data->fractolinfo->offset = init_vector2(offset.x + 10, offset.y);
+		data->fractolinfo->vp_offset = init_vector2(offset.x + 10, offset.y);
 	else if (button == ON_ARROW_UP)
-		data->fractolinfo->offset = init_vector2(offset.x, offset.y - 10);
+		data->fractolinfo->vp_offset = init_vector2(offset.x, offset.y - 10);
 	else if (button == ON_ARROW_DOWN)
-		data->fractolinfo->offset = init_vector2(offset.x, offset.y + 10);
+		data->fractolinfo->vp_offset = init_vector2(offset.x, offset.y + 10);
 	draw_fractol(data->appinfo, data->fractolinfo);
 }
 

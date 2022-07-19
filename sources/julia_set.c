@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/16 18:52:00 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/19 21:13:12 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	get_julia_set(t_fractolinfo *info, t_vector2 pixel)
 	double		xtemp;
 	t_vector2	pixel_scaled;
 
-	pixel_scaled = get_pixel_zoomed(pixel, info->zoom, info->mouse_pos, info->zoomed_pos);
-	pixel_scaled = get_pixel_scaled(pixel_scaled, info->viewport, info->offset);
+	pixel_scaled = get_pixel_zoomed(pixel, info->zoom, info->zoom_offset);
+	pixel_scaled = get_pixel_scaled(pixel_scaled, info->viewport, info->vp_offset);
 	iteration = 0;
 	while ((pixel_scaled.x * pixel_scaled.x) + (pixel_scaled.y * pixel_scaled.y) <= 4
 		&& iteration < info->max_iteration)
