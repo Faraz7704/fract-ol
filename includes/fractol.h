@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/21 01:34:14 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/21 14:49:45 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define WIDTH			500
 # define HEIGHT			500
-# define ZOOM_FACTOR 	1.5
+# define ZOOM_FACTOR 	2
 
 typedef struct s_vector2
 {
