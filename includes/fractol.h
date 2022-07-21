@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/19 21:45:04 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/21 01:34:14 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include <stdint.h>
 #include <stdio.h>
 
-# define WIDTH			700
-# define HEIGHT			700
-# define ZOOM_FACTOR 	1.1
+# define WIDTH			500
+# define HEIGHT			500
+# define ZOOM_FACTOR 	1.5
 
 typedef struct s_vector2
 {

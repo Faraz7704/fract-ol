@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/19 21:13:21 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/21 01:49:47 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_formula(t_fractolinfo	*info)
 	}
 	else if (str_equal(info->name, "Rectangle"))
 	{
-		info->viewport = init_rect(0, 0, 35, 50);
+		info->viewport = init_rect((WIDTH / 2) - (125 / 2), 0, 125, 500);
 		info->formula = &get_rectangle;
 	}
 	else
