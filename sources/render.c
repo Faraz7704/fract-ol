@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/21 01:51:51 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/22 17:45:58 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 		fractolinfo->imageinfo->image, 0, 0);
 	mlx_string_put(appinfo->mlx, appinfo->window, 10, 20, 0xCCCCCC,
 		"H - Help");
+	if (fractolinfo->is_fixed_mouse)
+		mlx_string_put(appinfo->mlx, appinfo->window, 10, 50, 0xCCCC, "Fixed");
 }
 
 void	draw_help(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
@@ -79,17 +81,19 @@ void	draw_help(t_appinfo *appinfo, t_fractolinfo *fractolinfo)
 	mlx_put_image_to_window(appinfo->mlx, appinfo->window,
 		fractolinfo->imageinfo->image, 0, 0);
 	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 70,
-		(HEIGHT / 2) - 100, 0xCCCCCC, "Controls");
+		(HEIGHT / 2) - 105, 0xCCCCCC, "Controls");
 	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 70,
-		(HEIGHT / 2) - 60, 0xCCCCCC, "Reset          - R");
+		(HEIGHT / 2) - 75, 0xCCCCCC, "Reset          - R");
 	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 70,
-		(HEIGHT / 2) - 30, 0xCCCCCC, "Color Shift    		- C");
+		(HEIGHT / 2) - 45, 0xCCCCCC, "Color Shift    		- C");
+	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 70,
+		(HEIGHT / 2) - 15, 0xCCCCCC, "Fix Julia Set  - F");
 	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2 - 70),
-		(HEIGHT / 2) - 0, 0xCCCCCC, "Move           		- Arrows");
+		(HEIGHT / 2) + 15, 0xCCCCCC, "Move           		- Arrows");
 	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 70,
-		(HEIGHT / 2) + 30, 0xCCCCCC, "Zoom           		- Scroll");
+		(HEIGHT / 2) + 45, 0xCCCCCC, "Zoom           		- Scroll");
 	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 70,
-		(HEIGHT / 2) + 60, 0xCCCCCC, "Iterations    		 - +/-");
+		(HEIGHT / 2) + 75, 0xCCCCCC, "Iterations    		 - +/-");
 	mlx_string_put(appinfo->mlx, appinfo->window, (WIDTH / 2) - 70,
-		(HEIGHT / 2) + 110, 0xCCCCCC, "Close Help     		- H");
+		(HEIGHT / 2) + 115, 0xCCCCCC, "Close Help     		- H");
 }

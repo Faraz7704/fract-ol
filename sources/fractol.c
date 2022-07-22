@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/16 18:41:51 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/22 17:58:12 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	register_events(t_appinfo *appinfo, t_event_data *event_data)
 {	
 	mlx_hook(appinfo->window, 17, 0, exit_app, event_data);
 	mlx_hook(appinfo->window, 4, 0, mouse_down_handler, event_data);
+	mlx_hook(appinfo->window, 6, 0, mouse_move_handler, event_data);
 	mlx_hook(appinfo->window, 2, 0, key_down_handler, event_data);
 }
 
@@ -56,6 +57,12 @@ void	start_app(char *name)
 int	main(int ac, char **av)
 {
 	if (ac == 2)
-		start_app(av[1]);
+	{
+		if (str_equal(av[1], "Mandelbrot")
+			|| str_equal(av[1], "Julia set")
+			|| str_equal(av[1], "Burning ship"))
+			start_app(av[1]);
+	}
+	print_help();
 	return (0);
 }

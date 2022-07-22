@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/21 14:49:45 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/22 17:54:22 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <stdint.h>
 #include <stdio.h>
 
-# define WIDTH			500
-# define HEIGHT			500
+# define WIDTH			1000
+# define HEIGHT			1000
 # define ZOOM_FACTOR 	2
 
 typedef struct s_vector2
@@ -62,12 +62,15 @@ typedef struct s_fractolinfo
 	char			*name;
 	t_imageinfo		*imageinfo;
 	int				max_iteration;
-	t_rect			viewport;
 	int				(*formula)(struct s_fractolinfo *, t_vector2);
+	t_rect			viewport;
+	t_vector2		vp_offset;
 	double			zoom;
 	t_vector2		zoom_offset;
-	t_vector2		vp_offset;
 	t_vector2		complex;
+	t_vector2		mouse_pos;
+	int				is_fixed_mouse;
+	int				is_help;
 }	t_fractolinfo;
 
 typedef struct s_appinfo
@@ -96,6 +99,7 @@ enum {
 	ON_KEY_ESC = 53,
 	ON_KEY_H = 4,
 	ON_KEY_R = 15,
+	ON_KEY_F = 3,
 };
 
 // fractol
@@ -111,8 +115,10 @@ void			fractol_reset(t_fractolinfo	*info);
 
 // render
 void			draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
-t_vector2		get_pixel_scaled(t_vector2 pixel, t_rect viewport, t_vector2 offset);
-t_vector2		get_pixel_zoomed(t_vector2 pixel, double zoom, t_vector2 offset);
+t_vector2		get_pixel_scaled(t_vector2 pixel, t_rect viewport,
+					t_vector2 offset);
+t_vector2		get_pixel_zoomed(t_vector2 pixel, double zoom,
+					t_vector2 offset);
 void			draw_help(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
 
 // math_utils
@@ -141,6 +147,7 @@ t_color			get_fractol_color( t_fractolinfo *info, t_vector2 pixel,
 // mouse
 int				mouse_down_handler(int button, int x, int y,
 					t_event_data *data);
+int				mouse_move_handler(int x, int y, t_event_data *data);
 
 // keyboard
 int				key_down_handler(int button, t_event_data	*data);

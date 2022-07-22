@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/21 01:49:47 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/22 18:06:20 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	init_formula(t_fractolinfo	*info)
 		info->complex = init_vector2(-0.4f, 0.6f);
 		info->formula = &get_julia_set;
 	}
+	else if (str_equal(info->name, "Burning ship"))
+	{
+		info->viewport = init_rect((WIDTH / 2) - (125 / 2), 0, 125, 500);
+		info->formula = &get_rectangle;
+	}
 	else if (str_equal(info->name, "Rectangle"))
 	{
 		info->viewport = init_rect((WIDTH / 2) - (125 / 2), 0, 125, 500);
@@ -64,6 +69,9 @@ void	fractol_reset(t_fractolinfo	*info)
 	info->zoom = 1.0f;
 	info->zoom_offset = init_vector2(0, 0);
 	info->vp_offset = init_vector2(0, 0);
+	info->mouse_pos = init_vector2(0, 0);
+	info->is_fixed_mouse = 0;
+	info->is_help = 0;
 }
 
 t_fractolinfo	*init_fractolinfo(char *name, int max_iteration,

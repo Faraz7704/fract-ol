@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 16:01:39 by fkhan             #+#    #+#             */
-/*   Updated: 2022/06/19 16:42:52 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/22 17:54:15 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 # define ERR_FRACTAL_NAME	"ERROR: Argument name invalid"
 
 void	debug_log(char *log);
+void	print_help(void);
 
 #endif
