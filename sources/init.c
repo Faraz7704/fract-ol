@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/22 18:06:20 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:17:08 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,18 @@ void	init_formula(t_fractolinfo	*info)
 {
 	if (str_equal(info->name, "Mandelbrot"))
 	{
-		// info->viewport = init_rect(-2.25, -1.37, 2.97, 2.74);
 		info->viewport = init_rect(-2.00, -1.12, 2.47, 2.24);
 		info->formula = &get_mandelbrot;
 	}
 	else if (str_equal(info->name, "Julia set"))
 	{
 		info->viewport = init_rect(-2, -2, 4, 4);
-		info->complex = init_vector2(-0.4f, 0.6f);
 		info->formula = &get_julia_set;
 	}
 	else if (str_equal(info->name, "Burning ship"))
 	{
-		info->viewport = init_rect((WIDTH / 2) - (125 / 2), 0, 125, 500);
-		info->formula = &get_rectangle;
-	}
-	else if (str_equal(info->name, "Rectangle"))
-	{
-		info->viewport = init_rect((WIDTH / 2) - (125 / 2), 0, 125, 500);
-		info->formula = &get_rectangle;
+		info->viewport = init_rect(-2.25, -2.25, 3.5, 3.5);
+		info->formula = &get_burning_ship;
 	}
 	else
 		info->formula = NULL;
@@ -72,19 +65,21 @@ void	fractol_reset(t_fractolinfo	*info)
 	info->mouse_pos = init_vector2(0, 0);
 	info->is_fixed_mouse = 0;
 	info->is_help = 0;
+	info->palette_index = 0;
 }
 
 t_fractolinfo	*init_fractolinfo(char *name, int max_iteration,
-	t_appinfo *appinfo)
+	t_appinfo *appinfo, t_vector2 complex)
 {
 	t_fractolinfo	*info;
 
 	info = malloc(sizeof(t_fractolinfo));
 	if (!info)
 		debug_log(ERR_FRACTOL_INIT);
-	info->name = name;
+	info->name = ft_strdup(name);
 	info->imageinfo = init_imageinfo(appinfo->mlx);
 	info->max_iteration = max_iteration;
+	info->complex = complex;
 	init_formula(info);
 	fractol_reset(info);
 	return (info);

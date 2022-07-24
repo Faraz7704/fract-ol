@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rectangle.c                                        :+:      :+:    :+:   */
+/*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/19 21:13:09 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/24 21:14:54 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	get_rectangle(t_fractolinfo *info, t_vector2 pixel)
+int	get_burning_ship(t_fractolinfo *info, t_vector2 pixel)
 {
+	int			iteration;
+	double		xtemp;
 	t_vector2	pixel_scaled;
 
 	pixel_scaled = get_pixel_zoomed(pixel, info->zoom, info->zoom_offset);
-	pixel_scaled = get_pixel_scaled(pixel_scaled, info->viewport, init_vector2(0, 0));
-	if (pixel_scaled.x >= 0 && pixel_scaled.x < info->viewport.size.x
-		&& pixel_scaled.y >= 0 && pixel_scaled.y < info->viewport.size.y)
-		return (info->max_iteration);
-	return (1);
+	pixel_scaled = get_pixel_scaled(pixel_scaled, info->viewport,
+			info->vp_offset);
+	pixel.x = pixel_scaled.x;
+	pixel.y = pixel_scaled.y;
+	iteration = 0;
+	while ((pixel.x * pixel.x) + (pixel.y * pixel.y) < 4
+		&& iteration < info->max_iteration)
+	{
+		xtemp = (pixel.x * pixel.x) - (pixel.y * pixel.y) + pixel_scaled.x;
+		pixel.y = fabs(2 * pixel.x * pixel.y) + pixel_scaled.y;
+		pixel.x = xtemp;
+		iteration++;
+	}
+	return (iteration);
 }

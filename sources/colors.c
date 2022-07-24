@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/16 18:47:24 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:20:25 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,9 @@ t_color	get_fractol_color(t_fractolinfo *info, t_vector2 pixel, int iteration)
 	(void)pixel;
 	if (iteration == info->max_iteration)
 		return (create_trgb(0, 0, 0, 0));
-	palette.size = 5;
-	palette.colors = malloc(sizeof(t_palette) * palette.size);
+	palette = get_palette(info->palette_index);
 	if (!palette.colors)
 		return (create_trgb(0, 255, 255, 255));
-	palette.colors[0] = create_trgb(0, 100, 45, 120);
-	palette.colors[1] = create_trgb(0, 4, 120, 120);
-	palette.colors[2] = create_trgb(0, 4, 120, 120);
-	palette.colors[3] = create_trgb(0, 34, 24, 72);
-	palette.colors[4] = create_trgb(0, 34, 24, 72);
 	color = linear_color((double)iteration, info->max_iteration, palette);
 	free(palette.colors);
 	return (color);

@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/22 17:54:22 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:15:48 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdint.h>
-#include <stdio.h>
 
 # define WIDTH			1000
 # define HEIGHT			1000
@@ -64,6 +63,7 @@ typedef struct s_fractolinfo
 	int				max_iteration;
 	int				(*formula)(struct s_fractolinfo *, t_vector2);
 	t_rect			viewport;
+	int				palette_index;
 	t_vector2		vp_offset;
 	double			zoom;
 	t_vector2		zoom_offset;
@@ -100,18 +100,26 @@ enum {
 	ON_KEY_H = 4,
 	ON_KEY_R = 15,
 	ON_KEY_F = 3,
+	ON_KEY_C = 8,
+	ON_KEY_1 = 18,
+	ON_KEY_2 = 19,
+	ON_KEY_3 = 20
 };
 
 // fractol
 int				exit_app(t_event_data *event_data);
-t_event_data	init_event_data(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
 
 // init
 t_appinfo		*init_app(char *name);
 t_fractolinfo	*init_fractolinfo(char *name, int max_iteration,
-					t_appinfo *appinfo);
+					t_appinfo *appinfo, t_vector2 complex);
 t_imageinfo		*init_imageinfo(void *mlx);
 void			fractol_reset(t_fractolinfo	*info);
+void			init_formula(t_fractolinfo	*info);
+
+// events
+t_event_data	init_event_data(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
+void			register_events(t_appinfo *appinfo, t_event_data *event_data);
 
 // render
 void			draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
@@ -135,8 +143,8 @@ int				get_mandelbrot(t_fractolinfo *info, t_vector2 pixel);
 // julia_set
 int				get_julia_set(t_fractolinfo *info, t_vector2 pixel);
 
-// rectangle
-int				get_rectangle(t_fractolinfo *info, t_vector2 pixel);
+// burning_ship
+int				get_burning_ship(t_fractolinfo *info, t_vector2 pixel);
 
 // colors
 t_color			create_trgb(int t, int r, int g, int b);
@@ -151,5 +159,15 @@ int				mouse_move_handler(int x, int y, t_event_data *data);
 
 // keyboard
 int				key_down_handler(int button, t_event_data	*data);
+
+// controls
+void			reset_control(t_event_data *data);
+void			move_control(int button, t_event_data *data);
+void			change_max_iteration(int button, t_event_data *data);
+void			fix_mouse_movement(t_event_data *data);
+void			change_fractol(int button, t_event_data *data);
+
+// palette
+t_palette		get_palette(int index);
 
 #endif
