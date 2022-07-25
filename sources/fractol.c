@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/24 21:18:57 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/25 17:23:05 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	valid_arg(int ac, char **av, t_vector2 *complex)
 	{
 		if (ac == 4)
 		{
-			complex->x = ft_atoi(av[2]);
-			complex->y = ft_atoi(av[3]);
+			complex->x = ft_atof(av[2]);
+			complex->y = ft_atof(av[3]);
 			return (1);
 		}
 		else if (ac == 2)

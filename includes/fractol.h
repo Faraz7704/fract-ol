@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/24 22:15:48 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/25 17:22:59 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,5 +169,8 @@ void			change_fractol(int button, t_event_data *data);
 
 // palette
 t_palette		get_palette(int index);
+
+// utils
+double			ft_atof(char *s);
 
 #endif
