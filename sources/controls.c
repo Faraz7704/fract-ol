@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/26 20:48:11 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/26 21:04:50 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	move_control(int button, t_event_data *data)
 	double		val;
 
 	offset = data->fractolinfo->vp_offset;
-	val = 10 * data->fractolinfo->zoom;
+	val = 20;
 	if (button == ON_ARROW_LEFT)
 		data->fractolinfo->vp_offset = init_vector2(offset.x - val, offset.y);
 	else if (button == ON_ARROW_RIGHT)
