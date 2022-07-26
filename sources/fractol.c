@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/25 17:23:05 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/26 19:27:33 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static void	start_app(char *name, t_vector2 complex)
 
 int	valid_arg(int ac, char **av, t_vector2 *complex)
 {
-	if (str_equal(av[1], "Mandelbrot") && ac == 2)
+	if (ac == 2 && str_equal(av[1], "Mandelbrot"))
 		return (1);
-	if (str_equal(av[1], "Julia set"))
+	if (ac >= 2 && str_equal(av[1], "Julia set"))
 	{
 		if (ac == 4)
 		{
@@ -52,7 +52,7 @@ int	valid_arg(int ac, char **av, t_vector2 *complex)
 		else if (ac == 2)
 			return (1);
 	}
-	if (str_equal(av[1], "Burning ship") && ac == 2)
+	if (ac == 2 && str_equal(av[1], "Burning ship"))
 		return (1);
 	return (0);
 }

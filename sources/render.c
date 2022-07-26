@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:07:19 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/24 15:44:49 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/26 20:50:54 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,21 @@ t_vector2	get_pixel_scaled(t_vector2 pixel, t_rect viewport, t_vector2 offset)
 
 	ratio = min(WIDTH / viewport.size.x, HEIGHT / viewport.size.y);
 	pixel_scaled.x = ((pixel.x - ((WIDTH - viewport.size.x * ratio) / 2))
-			+ viewport.pos.x * ratio) / ratio + (offset.x / ratio);
+			+ viewport.pos.x * ratio) + offset.x;
 	pixel_scaled.y = ((pixel.y - ((HEIGHT - viewport.size.y * ratio) / 2))
-			+ viewport.pos.y * ratio) / ratio + (offset.y / ratio);
+			+ viewport.pos.y * ratio) + offset.y;
 	return (pixel_scaled);
 }
 
-t_vector2	get_pixel_zoomed(t_vector2 pixel, double zoom, t_vector2 offset)
+t_vector2	get_pixel_zoomed(t_vector2 pixel, double zoom, t_rect viewport,
+		t_vector2 offset)
 {
 	t_vector2	pixel_zoomed;
+	double		ratio;
 
-	pixel_zoomed.x = (pixel.x - offset.x) * zoom;
-	pixel_zoomed.y = (pixel.y - offset.y) * zoom;
-	pixel_zoomed.x += offset.x;
-	pixel_zoomed.y += offset.y;
+	ratio = min(WIDTH / viewport.size.x, HEIGHT / viewport.size.y);
+	pixel_zoomed.x = offset.x + pixel.x * zoom / ratio;
+	pixel_zoomed.y = offset.y + pixel.y * zoom / ratio;
 	return (pixel_zoomed);
 }
 

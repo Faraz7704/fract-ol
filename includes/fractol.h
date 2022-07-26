@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 14:59:12 by fkhan             #+#    #+#             */
-/*   Updated: 2022/07/25 17:22:59 by fkhan            ###   ########.fr       */
+/*   Updated: 2022/07/26 20:40:11 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void			register_events(t_appinfo *appinfo, t_event_data *event_data);
 void			draw_fractol(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
 t_vector2		get_pixel_scaled(t_vector2 pixel, t_rect viewport,
 					t_vector2 offset);
-t_vector2		get_pixel_zoomed(t_vector2 pixel, double zoom,
+t_vector2		get_pixel_zoomed(t_vector2 pixel, double zoom, t_rect viewport,
 					t_vector2 offset);
 void			draw_help(t_appinfo *appinfo, t_fractolinfo *fractolinfo);
 
